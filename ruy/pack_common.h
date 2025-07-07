@@ -115,7 +115,7 @@ struct MemcpyRowMajorFloatPackImpl {
       float* packed_ptr = packed_matrix->data +
                           packed_matrix->layout.stride * start_col +
                           KernelCols * block_row;
-      int src_cols = std::min(end_col, src_matrix.layout.cols) - start_col;
+      int src_cols = std::min(end_col, static_cast<int>(src_matrix.layout.cols)) - start_col;
       int col = 0;
       for (; col <= src_cols - KernelCols; col += KernelCols) {
         memcpy(packed_ptr, src_ptr, KernelCols * sizeof(float));
